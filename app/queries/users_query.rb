@@ -2,7 +2,7 @@ module UsersQuery
   extend self
 
   def friends(user_id:, scope: false)
-    query = relation.joins(sql(scope: scopt)).where.not(id: user_id)
+    query = relation.joins(sql(scope: scope)).where.not(id: user_id)
 
     query.where(friendships: { user_id: user_id })
       .or(query.where(friendships: { friend_id: user_id }))

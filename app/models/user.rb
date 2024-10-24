@@ -5,13 +5,16 @@ class User < ApplicationRecord
     relationn.unscope(where: :user_id)
     .where(user_id: user.id)
     .or(relationn.where(friend_id: user.id))
-
-     # FriendshipsQuery.both_ways(user_id: user.id)
    },
    inverse_of: :user,
    dependent: :destroy
 
   has_many :friends,
-    ->(user) { UsersQuery.friends(user_id: user.id, scope: true) },
+    ->(user) {
+      relationn = @relation ||= User.all
+      query = relationn.joins("OR users.id = friendships.user_id").where.not(id: user.id)
+      query.where(friendships: { user_id: user.id })
+        .or(query.where(friendships: { friend_id: user.id }))
+    },
     through: :friendships
 end

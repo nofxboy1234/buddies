@@ -13,7 +13,9 @@ class User < ApplicationRecord
     ->(user) {
       @relation ||= User.all
       query = @relation.joins("OR users.id = friendships.user_id")
+
       query = query.where.not(id: user.id)
+
       query.where(friendships: { user_id: user.id })
         .or(query.where(friendships: { friend_id: user.id }))
     },

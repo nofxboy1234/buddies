@@ -35,3 +35,19 @@ end
 # "users"."id" != $3
 
 # [["user_id", 1], ["friend_id", 1], ["id", 1]]
+
+# -----------------------------------------------
+
+# SELECT "users".* FROM "users"
+
+# INNER JOIN "friendships" ON
+# "users"."id" = "friendships"."friend_id"
+
+
+
+# WHERE "friendships"."user_id" = $1
+
+
+
+
+# [["user_id", 1]]

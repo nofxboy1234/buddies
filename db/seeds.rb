@@ -9,3 +9,11 @@
 #   end
 User.create!(name: 'user1')
 User.create!(name: 'user2')
+User.create!(name: 'user3')
+User.create!(name: 'user4')
+
+author1 = Author.create!(name: 'author1')
+author2 = Author.create!(name: 'author2')
+
+author1.books.create(published_at: Time.now)
+author1.save!

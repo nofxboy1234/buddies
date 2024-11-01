@@ -10,10 +10,11 @@ class User < ApplicationRecord
 
   has_many :friends,
     ->(user) {
-      query = User.all.joins("OR users.id = friendships.user_id")
-      query = query.where(friendships: { user_id: user.id })
-      .or(query.where(friendships: { friend_id: user.id }))
-      query = query.where.not(id: user.id)
+      query1 = User.all.joins("OR users.id = friendships.user_id")
+        .where(friendships: { user_id: user.id })
+      query2 = User.all.joins("OR users.id = friendships.user_id")
+        .where(friendships: { friend_id: user.id })
+      query3 = query1.or(query2).where.not(id: user.id)
     },
     through: :friendships
 end

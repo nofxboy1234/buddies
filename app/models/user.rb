@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   has_many :friendships,
    ->(user) {
-    Friendship.all.unscope(where: :user_id)
-      .where(user_id: user.id)
-      .or(Friendship.all.where(friend_id: user.id))
+    query1 = Friendship.all.unscope(where: :user_id).where(user_id: user.id)
+    query2 = Friendship.all.where(friend_id: user.id)
+    query1.or(query2)
    },
    inverse_of: :user,
    dependent: :destroy
@@ -14,7 +14,7 @@ class User < ApplicationRecord
         .where(friendships: { user_id: user.id })
       query2 = User.all.joins("OR users.id = friendships.user_id")
         .where(friendships: { friend_id: user.id })
-      query3 = query1.or(query2).where.not(id: user.id)
+      query1.or(query2).where.not(id: user.id)
     },
     through: :friendships
 end

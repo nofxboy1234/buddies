@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :friends,
     ->(user) {
       User.joins("OR users.id = friendships.user_id") # {3}
-        .where.not(id: user.id) # {6}
+        .where.not(id: user.id) # {4}
     },
     through: :friendships
 
@@ -24,7 +24,6 @@ class User < ApplicationRecord
   # FROM "users"
   # INNER JOIN "friendships"
   # ON "users"."id" = "friendships"."friend_id" {3}OR users.id = friendships.user_id{3}
-  # WHERE
-  # ({1}"friendships"."user_id" = 1{1} {2}OR "friendships"."friend_id" = 1{2})
-  # {6}AND "users"."id" != 1{6}
+  # WHERE ({1}"friendships"."user_id" = 1{1} {2}OR "friendships"."friend_id" = 1{2})
+  # {4}AND "users"."id" != 1{4}
 end

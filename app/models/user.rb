@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   has_many :friendships,
    ->(user) {
-    query1 = Friendship.all.unscope(where: :user_id).where(user_id: user.id)
+    friendships = Friendship.all.unscope(where: :user_id)
+    query1 = friendships.where(user_id: user.id)
     query2 = Friendship.all.where(friend_id: user.id)
     query1.or(query2)
    },

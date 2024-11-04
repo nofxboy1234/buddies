@@ -35,33 +35,3 @@ class User < ApplicationRecord
   # ({3}"friendships"."user_id" = 1{3} {1}{4}OR "friendships"."friend_id" = 1{1})
   # {5}AND "users"."id" != 1{5}
 end
-
-# SELECT "users".* FROM "users"
-
-# INNER JOIN "friendships" ON
-# "users"."id" = "friendships"."friend_id"
-# OR
-# users.id = friendships.user_id
-
-# WHERE
-# ("friendships"."user_id" = $1 OR "friendships"."friend_id" = $2)
-# AND
-# "users"."id" != $3
-
-# [["user_id", 1], ["friend_id", 1], ["id", 1]]
-
-# -----------------------------------------------
-
-# SELECT "users".* FROM "users"
-
-# INNER JOIN "friendships" ON
-# "users"."id" = "friendships"."friend_id"
-
-
-
-# WHERE "friendships"."user_id" = $1
-
-
-
-
-# [["user_id", 1]]

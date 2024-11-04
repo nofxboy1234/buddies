@@ -13,9 +13,13 @@ class User < ApplicationRecord
     ->(user) {
       query1 = User.joins("OR users.id = friendships.user_id")
         .where(friendships: { user_id: user.id })
+        .where.not(id: user.id)
+
       query2 = User.joins("OR users.id = friendships.user_id")
         .where(friendships: { friend_id: user.id })
-      query1.or(query2).where.not(id: user.id)
+        .where.not(id: user.id)
+
+      query1.or(query2)
     },
     through: :friendships
 end

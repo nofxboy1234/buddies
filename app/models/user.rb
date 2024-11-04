@@ -7,7 +7,7 @@ class User < ApplicationRecord
     query1.or(query2)
    },
    inverse_of: :user,
-   dependent: :destroys
+   dependent: :destroy
 
   # SELECT "friendships".*
   # FROM "friendships"

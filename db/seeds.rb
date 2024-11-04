@@ -7,10 +7,12 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-User.create!(name: 'user1')
-User.create!(name: 'user2')
+user1 = User.create!(name: 'user1')
+user2 = User.create!(name: 'user2')
 User.create!(name: 'user3')
 User.create!(name: 'user4')
+
+user1.friends << user2
 
 author1 = Author.create!(name: 'author1')
 author2 = Author.create!(name: 'author2')

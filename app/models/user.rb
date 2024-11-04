@@ -30,6 +30,6 @@ class User < ApplicationRecord
   # INNER JOIN "friendships"
   # ON "users"."id" = "friendships"."friend_id" {3}OR users.id = friendships.user_id{3}
   # WHERE
-  # ({1}{4}"friendships"."user_id" = 1{1}{4} {2}{5}OR "friendships"."friend_id" = 1{2}{5})
+  # ({1}"friendships"."user_id" = 1{1} {2}OR "friendships"."friend_id" = 1{2})
   # {6}AND "users"."id" != 1{6}
 end

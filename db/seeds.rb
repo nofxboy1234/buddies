@@ -18,4 +18,5 @@ author1 = Author.create!(name: 'author1')
 author2 = Author.create!(name: 'author2')
 
 author1.books.create(published_at: Time.now)
+author1.books.create(published_at: Time.now)
 author1.save!

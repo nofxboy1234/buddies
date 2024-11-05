@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_02_053004) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_05_080435) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,6 +36,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_02_053004) do
     t.index ["author_id"], name: "index_books_on_author_id"
   end
 
+  create_table "distributors", force: :cascade do |t|
+    t.string "zipcode"
+  end
+
   create_table "friendships", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "friend_id", null: false
@@ -55,6 +59,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_02_053004) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "address"
   end
 
   add_foreign_key "accounts", "suppliers"

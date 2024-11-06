@@ -17,6 +17,9 @@ user1.friends << user2
 author1 = Author.create!(name: 'author1')
 author2 = Author.create!(name: 'author2')
 
-author1.books.create(published_at: Time.now)
-author1.books.create(published_at: Time.now)
-author1.save!
+author1.books.create(published_at: Time.now - 1.day)
+author1.books.create(published_at: Time.now - 2.days)
+
+author2.books.create(published_at: Time.now - 3.days)
+author2.books.create(published_at: Time.now - 4.days)
+author2.books.create(published_at: Time.now - 30.days)

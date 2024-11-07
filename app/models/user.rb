@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   has_many :today_friendships,
    -> {
-    where("friendships.created_at > ?", Time.now.midnight)
+    where("friendships.created_at > ?", 1.week.ago)
    },
   inverse_of: :user,
   class_name: "Friendship",
